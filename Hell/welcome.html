@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Welcome - Ghar_pe_raho.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Coiny:wght@400;700&family=Creepster&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:radial-gradient(circle at top,#222,#000);
+        font-family:'Coiny',cursive;
+        color:#fff;
+    }
+    .box{
+        text-align:center;
+        padding:30px 25px;
+        border-radius:22px;
+        background:rgba(0,0,0,0.75);
+        border:2px solid #ffd700;
+        box-shadow:0 18px 35px rgba(0,0,0,0.8);
+        width:90%;
+        max-width:420px;
+    }
+    .box h1{
+        font-family:'Creepster',cursive;
+        font-size:clamp(1.7rem,5vw,2.5rem);
+        margin-bottom:10px;
+        color:#ffd700;
+        text-shadow:0 0 12px #ff6b35;
+    }
+    .box p{font-size:0.95rem;margin-bottom:20px;}
+    .btn{
+        display:block;
+        width:100%;
+        margin-bottom:10px;
+        padding:10px 0;
+        border:none;
+        border-radius:999px;
+        font-family:'Coiny',cursive;
+        font-size:1rem;
+        cursor:pointer;
+        background:linear-gradient(45deg,#ff6b35,#ffd700);
+        color:#000;
+        box-shadow:0 8px 20px rgba(0,0,0,0.7);
+        transition:transform .2s,box-shadow .2s;
+    }
+    .btn:hover{
+        transform:translateY(-3px);
+        box-shadow:0 12px 26px rgba(0,0,0,0.9);
+    }
+    .small{font-size:0.85rem;margin-top:8px;}
+    footer{
+        position:fixed;
+        left:0;right:0;bottom:0;
+        padding:6px 12px;
+        background:rgba(0,0,0,0.8);
+        font-size:0.8rem;
+        display:flex;
+        justify-content:space-between;
+        color:#fff;
+    }
+</style>
+</head>
+<body>
+<div class="box">
+    <h1>Welcome to Ghar_pe_raho.com 😘</h1>
+    <p>Login karke apni bhoot wali journey start karo, ya naya account banao.</p>
+    <button class="btn" onclick="location.href='login.html'">Login – Enter to Bhoot World 👻</button>
+    <button class="btn" onclick="location.href='signup.html'">New here? Create Account ✨</button>
+    <p class="small">Account nahi hai? Tension mat lo, sign up free hai.</p>
+</div>
+
+<footer>
+    <span>&copy; 2025 Ghar_pe_raho.com</span>
+    <span>Made with fear & fun 👻</span>
+</footer>
+</body>
+</html>

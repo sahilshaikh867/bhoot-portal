@@ -1,0 +1,222 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.html");
+  exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Your Life Goal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Coiny:wght@400;700&family=Creepster&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        /* body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top, #222, #000);
+            color: #fff;
+            font-family: 'Coiny', cursive;
+            overflow: hidden;
+        }*/
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            /* upar se start */
+            padding-top: 60px;
+            /* content niche push */
+            background: radial-gradient(circle at top, #222, #000);
+            color: #fff;
+            font-family: 'Coiny', cursive;
+            overflow: hidden;
+        }
+
+        /* Welcome heading box */
+        .Welcome {
+            width: 100%;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            animation: welcomeFade 1s ease-out;
+        }
+
+        .Welcome h1 {
+            font-family: 'Creepster', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.3rem);
+            color: #ffd700;
+            text-shadow: 0 0 10px #ff6b35;
+        }
+
+        /* Tumhari existing intro-box wali CSS yahi neeche rehne do */
+        .intro-box {
+            text-align: center;
+            padding: 25px 20px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            width: 90%;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+
+        /* Simple fade-in animation for welcome */
+        @keyframes welcomeFade {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .intro-box {
+            text-align: center;
+            padding: 25px 20px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-family: 'Creepster', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: none;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            font-family: 'Coiny', cursive;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Coiny', cursive;
+            background: linear-gradient(45deg, #ff6b35, #ffd700);
+            color: #000;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            font-family: 'Creepster', cursive;
+            font-size: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .6s;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ghost {
+            font-size: 4rem;
+            animation: float 1.5s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Welcome">
+        <h1>Ghar_pe_raho.com Me apka swagat hai..😘</h1>
+    </div>
+
+    <div class="intro-box">
+        <h1>What is your life goal?</h1>
+        <p>Apna goal likho, phir bhoot portal decide karega tumhari journey... 👻</p>
+        <input type="text" id="goal" placeholder="e.g. Become a legend">
+        <button onclick="startPortal()">ENTER PORTAL</button>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="ghost">👻</div>
+        <div>Calculating your destiny...</div>
+    </div>
+
+    <script>
+        function startPortal() {
+            const goal = document.getElementById('goal').value.trim();
+            if (!goal) {
+                alert('Pehle apna life goal likho!');
+                return;
+            }
+            // chota animation + delay, phir bhoot.html khulega
+            const overlay = document.getElementById('overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+                window.location.href = 'bhoot.html';
+            }, 2000); // 2 second ke baad redirect
+        }
+    </script>
+</body>
+
+</html>

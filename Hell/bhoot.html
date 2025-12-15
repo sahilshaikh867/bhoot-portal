@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Heaven • Earth • Hell Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Coiny:wght@400;700&family=Creepster&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Coiny', cursive;
+            background: linear-gradient(45deg, #0f0f23, #1a0033, #330066, #4a007a);
+            background-size: 400% 400%;
+            animation: bgMove 15s ease infinite;
+            /* min-height:100vh;*/
+            overflow: hidden;
+            color: #fff;
+        }
+
+        @keyframes bgMove {
+            0% {
+                background-position: 0 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0 50%
+            }
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .centered {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1.title {
+            font-family: 'Nosifer', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-shadow: 0 0 20px #ff6b35, 0 0 40px #ff1493;
+            margin-bottom: 1rem;
+        }
+
+        p.subtitle {
+            font-family: 'Creepster', cursive;
+            font-size: clamp(1.1rem, 4vw, 2.3rem);
+            color: #ffd700;
+            margin-bottom: 3rem;
+        }
+
+        .doors {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .door {
+            width: 190px;
+            height: 280px;
+            border-radius: 22px;
+            border: 6px solid #ffd700;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6);
+            transition: transform .4s;
+            transform-style: preserve-3d;
+            background: #000;
+        }
+
+        .door:hover {
+            transform: scale(1.08) rotateY(10deg)
+        }
+        .door:hover{
+    transform:scale(1.08) rotateY(10deg);
+    box-shadow:0 0 25px rgba(255,215,0,0.9);
+    animation:doorShake 0.25s linear;
+}
+@keyframes doorShake{
+    0%{transform:scale(1.08) rotateY(10deg) translateX(0);}
+    25%{transform:scale(1.08) rotateY(10deg) translateX(-3px);}
+    50%{transform:scale(1.08) rotateY(10deg) translateX(3px);}
+    100%{transform:scale(1.08) rotateY(10deg) translateX(0);}
+}
+#sparkles{position:fixed;inset:0;pointer-events:none;z-index:2;}
+.sparkle{
+    position:absolute;
+    width:4px;height:4px;
+    background:#ffd700;
+    border-radius:50%;
+    box-shadow:0 0 8px #ffd700;
+    animation:sparkleFloat 4s linear infinite;
+}
+@keyframes sparkleFloat{
+    0%{transform:translateY(100vh) scale(0);opacity:0;}
+    20%{opacity:1;}
+    80%{opacity:1;}
+    100%{transform:translateY(-50px) scale(1);opacity:0;}
+}
+
+
+        .door-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .door-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .door-heaven {
+            background: linear-gradient(#87CEEB, #E0F6FF)
+        }
+
+        .door-earth {
+            background: linear-gradient(#4CAF50, #C8E6C9)
+        }
+
+        .door-hell {
+            background: linear-gradient(#8B0000, #FF4500)
+        }
+
+        .door-hell::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            animation: fireSpin 1s linear infinite;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes fireSpin {
+            from {
+                transform: translate(0, 0) rotate(0deg)
+            }
+
+            to {
+                transform: translate(25px, 25px) rotate(180deg)
+            }
+        }
+
+        /* WALKING GOD across screen */
+        .walker {
+            position: fixed;
+            bottom: 8px;
+            left: -140px;
+            width: 120px;
+            height: auto;
+            z-index: 5;
+            animation: walk 18s linear infinite;
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.5));
+        }
+
+        @keyframes walk {
+            0% {
+                left: -140px;
+                transform: scaleX(1)
+            }
+
+            45% {
+                left: calc(100% + 40px);
+                transform: scaleX(1)
+            }
+
+            50% {
+                left: calc(100% + 40px);
+                transform: scaleX(-1)
+            }
+
+            95% {
+                left: -140px;
+                transform: scaleX(-1)
+            }
+
+            100% {
+                left: -140px;
+                transform: scaleX(1)
+            }
+        }
+
+        /* Floating guide god in rooms */
+        /*.guide {
+            position: fixed;
+            right: 15px;
+            top: 70px;
+            width: 120px;
+            z-index: 6;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+            cursor: pointer;
+        }*/
+        .guide{
+    position:fixed;
+    right:15px;
+    top:70px;
+    width:120px;
+    z-index:9999;           /* z-index ko bada rakho */
+    animation:float 3s ease-in-out infinite;
+    filter:drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+    cursor:pointer;
+}
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        .bubble {
+            position: fixed;
+            right: 150px;
+            top: 60px;
+            max-width: 260px;
+            background: #fff;
+            color: #000;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: .9rem;
+            font-family: 'Coiny', cursive;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(10px) scale(.9);
+            transition: all .25s;
+            z-index: 7;
+        }
+
+        .bubble::after {
+            content: "";
+            position: absolute;
+            right: -12px;
+            top: 14px;
+            border-width: 8px 0 8px 12px;
+            border-style: solid;
+            border-color: transparent transparent transparent #fff;
+        }
+
+        .bubble.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Realms with animated background images */
+        .room{
+        position:fixed;
+        inset:0;
+        display:none;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        padding:70px 10px 20px;
+        text-align:center;
+        background-size:cover;
+        background-position:center;
+        animation:roomBgMove 20s linear infinite;
+    }
+
+
+
+        /*footer{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.059);
+    color: #fff;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    z-index: 30;
+}
+footer a{
+    color: #ffd700;
+    text-decoration: none;
+}
+footer a:hover{
+    text-decoration: underline;
+}*/
+        footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0);
+            color: #fff;
+            font-size: 0.6rem;
+            z-index: 30;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 12px;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        @keyframes roomBgMove {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        .room-heaven {
+            background-image: url('assets/img/bg-heaven.jpg');
+        }
+
+        .room-earth {
+            background-image: url('assets/img/bg-earth.jpg');
+        }
+
+        .room-hell {
+            background-image: url('assets/img/bg-hell.jpg');
+        }
+
+        .room-hell::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 80%, transparent 0, rgba(255, 220, 0, 0.35) 40%, transparent 70%);
+            opacity: .8;
+            pointer-events: none;
+            animation: hellGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes hellGlow {
+
+            0%,
+            100% {
+                opacity: .6
+            }
+
+            50% {
+                opacity: 1
+            }
+        }
+
+        .room h2 {
+            font-family: 'Nosifer', cursive;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .room>p {
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .realm-img {
+            width: 180px;
+            margin-top: 10px;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.7));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .services {
+            max-width: 850px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .service {
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 18px;
+            padding: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s, background .2s;
+        }
+
+        .service:hover {
+            transform: translateY(-6px);
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 2px solid #ffd700;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-family: 'Coiny', cursive;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        /* Service detail overlay */
+        .service-page {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            z-index: 18;
+        }
+
+        .service-box {
+            max-width: 480px;
+            background: #111;
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .service-box h3 {
+            margin-bottom: 10px
+        }
+
+        .close-service {
+            margin-top: 15px;
+            padding: 8px 15px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Coiny', cursive;
+        }
+
+        /* Thunder flash */
+        .flash {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 4;
+            transition: opacity .12s;
+        }
+
+        @media(max-width:768px) {
+            .bubble {
+                right: 10px;
+                top: 150px;
+                max-width: 220px
+            }
+
+            .bubble::after {
+                right: 40px
+            }
+
+            .guide {
+                right: calc(50% - 60px);
+                top: 60px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- WALKING GOD -->
+    <img src="assets/img/god.png" alt="Walking God" class="walker">
+
+    <!-- Floating guide god -->
+    <img src="assets/img/god.png" alt="Guide God" class="guide" id="guideGod">
+    <div class="bubble" id="godBubble"></div>
+
+    <!-- Flash overlay for Hell thunder -->
+    <div class="flash" id="flash"></div>
+
+    <!-- WELCOME PAGE -->
+    <div id="welcome" class="centered">
+        <h1 class="title">HEAVEN • EARTH • HELL</h1>
+        <p class="subtitle">Choose your destination... socho ache se! 👻: Yaa Phir Sahil Se Puchh Lo...😎</p>
+
+        <div class="doors">
+            <div class="door door-heaven" data-realm="heaven">
+                <div class="door-inner">
+                    <img src="assets/img/heaven-door.png" alt="Heaven" style="width:110px;">
+                </div>
+                <div class="door-label">👼 HEAVEN</div>
+            </div>
+
+            <div class="door door-earth" data-realm="earth">
+                <div class="door-inner">
+                    <img src="assets/img/earth.png" alt="Earth" style="width:110px;">
+                </div>
+                <div class="door-label">🌍 EARTH</div>
+            </div>
+
+            <div class="door door-hell" data-realm="hell">
+                <div class="door-inner">
+                    <img src="assets/img/devil.png" alt="Hell" style="width:110px;">
+                </div>
+                <div class="door-label">😈 HELL</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEAVEN ROOM -->
+    <div id="room-heaven" class="room room-heaven">
+        <button class="back-btn" onclick="goHome()">← Back to Portal</button>
+        <h2>👼 Heaven Lounge</h2>
+        <p>Welcome, pure soul! Swarg mein swag ke saath aao. ✨</p>
+        <img src="assets/img/heaven-door.png" alt="Heaven Realm" class="realm-img">
+
+        <div class="services">
+            <div class="service"
+                onclick="openService('Halo Glow','Tumhara chehra itna chamkega ki ring light bhi jealous ho jayegi!')">
+                ✨ Unlimited Halo Glow
+            </div>
+            <div class="service"
+                onclick="openService('Angel Wings Upgrade','Turbo booster wings – ek hi jump mein cloud number 9!')">
+                🕊️ Angel Wings Upgrade
+            </div>
+            <div class="service"
+                onclick="openService('Cloud Wi‑Fi','Buffering sirf neeche Earth pe hoti hai, yahan 999 GB/s speed!')">
+                ☁️ Cloud Wi‑Fi
+            </div>
+        </div>
+    </div>
+
+    <!-- EARTH ROOM -->
+    <div id="room-earth" class="room room-earth">
+        <button class="back-btn" onclick="goHome()">← Back to Portal</button>
+        <h2>🌍 Earth Reset</h2>
+        <p>New life, same mistakes? Dekhte hain… 😏</p>
+        <img src="assets/img/earth.png" alt="Earth Realm" class="realm-img">
+
+        <div class="services">
+            <div class="service"
+                onclick="openService('Garden Plot','Free zameen jahan paudha bhi bolega: “bhai kya scene hai!”')">
+                🌱 Magical Garden Plot
+            </div>
+            <div class="service"
+                onclick="openService('Rainbow Pass','Seedha rainbow pe morning walk – log neeche se sirf dekhte rahenge.')">
+                🌈 Rainbow Pass
+            </div>
+            <div class="service"
+                onclick="openService('Pet Paradise','Har janam ka favourite pet yahan ready hai tumhein adopt karne!')">
+                🐾 Pet Paradise
+            </div>
+        </div>
+    </div>
+
+    <!-- HELL ROOM -->
+    <div id="room-hell" class="room room-hell">
+        <button class="back-btn" onclick="goHome()">← Back to Portal</button>
+        <h2>😈 Hell Party Zone</h2>
+        <p>Ab aaya asli mazza – welcome to permanent summer. 🔥</p>
+        <img src="assets/img/devil.png" alt="Hell Realm" class="realm-img">
+
+        <div class="services">
+            <div class="service"
+                onclick="openService('Fire Pit Parties','BBQ tumhara bhi ho sakta hai, isliye seedha bench pe mat baithna!')">
+                🔥 Fire Pit Parties
+            </div>
+            <div class="service"
+                onclick="openService('Lightning Shows','Har thunder ke saath free horror background music – live!')">
+                ⚡ Lightning Shows
+            </div>
+            <div class="service"
+                onclick="openService('Lava Pool','Yahan swimming aisi hoti hai ki towel bhi smoke karta hai.')">
+                🌋 Lava Pool
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE DETAIL OVERLAY -->
+    <div id="servicePage" class="service-page">
+        <div class="service-box">
+            <h3 id="serviceTitle"></h3>
+            <p id="serviceText"></p>
+            <button class="close-service" onclick="closeService()">Close</button>
+        </div>
+    </div>
+
+    <!-- BACKGROUND MUSIC (local files) -->
+    <audio id="music-heaven" loop>
+        <source src="assets/audio/heaven.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="music-earth" loop>
+        <source src="assets/audio/earth.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="music-hell" loop>
+        <source src="assets/audio/horror.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Hover sound effect -->
+    <audio id="hover-sfx">
+        <source src="assets/audio/heaven-hover.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const bubble = document.getElementById('godBubble');
+        const flash = document.getElementById('flash');
+        const guide = document.getElementById('guideGod');
+guide.addEventListener('click', ()=>{
+    showBubble('service');   // random funny message
+});
+
+
+        const messages = {
+            welcome: [
+                "Kahan jana hai? Soch lo, return policy nahi hai! 😜",
+                "Swarg, Dharti ya Hell – dil se choose karo, CV mat dikhana. 😂",
+                "Yahan par sabki life goals same hai: 'Kaam karna, party karna, repeat.' 😎"
+            ],
+            heaven: [
+                "Acha kaam kiya tha life mein, warna yahan entry mushkil hai! 😇",
+                "Relax karo, yahan sirf good vibes aur free Wi‑Fi hai. ✨"
+            ],
+            earth: [
+                "Tumhe lagta hai tum iss laayak ho? Mere hisaab se tumhe Hell mein jana chahiye! 😈",
+                "New game+ unlock ho gaya, par cheat code mat use karna. 😉"
+            ],
+            hell: [
+                "Perfect! Hamari party ko tum jaise logon ki zaroorat thi. 🔥",
+                "Ticket one‑way hai bhai, sunscreen ka koi fayda nahi. 😈"
+            ],
+            service: [
+                "Service choose karo, par blame mat karna baad mein. 😜",
+                "Yeh option dekh ke bhi agar doubt hai toh Hell best hai. 😂"
+            ]
+        };
+
+        function showBubble(key) {
+            const list = messages[key] || messages.welcome;
+            const msg = list[Math.floor(Math.random() * list.length)];
+            bubble.textContent = msg;
+            bubble.classList.add('show');
+            setTimeout(() => bubble.classList.remove('show'), 4000);
+        }
+
+        // hover sound
+        const hoverAudio = document.getElementById('hover-sfx');
+        function playHover() {
+            if (!hoverAudio) return;
+            hoverAudio.currentTime = 0;
+            hoverAudio.play().catch(() => { });
+        }
+
+        // doors hover: special line for EARTH
+        document.querySelectorAll('.door').forEach(d => {
+            d.addEventListener('mouseenter', () => {
+                playHover();
+                const realm = d.dataset.realm;
+                if (realm === 'earth') {
+                    bubble.textContent = "Tumhe lagta hai tum iss laayak ho? Mere hisaab se tumhe Hell mein jana chahiye! 😏";
+                    bubble.classList.add('show');
+                    setTimeout(() => bubble.classList.remove('show'), 4500);
+                } else {
+                    showBubble(realm);
+                }
+            });
+            d.addEventListener('click', () => openRealm(d.dataset.realm));
+        });
+
+        // hover sound for services
+        document.querySelectorAll('.service').forEach(s => {
+            s.addEventListener('mouseenter', playHover);
+        });
+
+        // open / close realms
+        function openRealm(realm) {
+            document.getElementById('welcome').classList.add('hidden');
+            document.querySelectorAll('.room').forEach(r => r.style.display = 'none');
+            document.getElementById('room-' + realm).style.display = 'flex';
+            playMusicFor(realm);
+            showBubble(realm);
+            if (realm === 'hell') { hellFlashLoop(); }
+            else { stopFlash(); }
+        }
+
+        function goHome() {
+            document.getElementById('welcome').classList.remove('hidden');
+            document.querySelectorAll('.room').forEach(r => r.style.display = 'none');
+            stopMusic();
+            stopFlash();
+            showBubble('welcome');
+        }
+
+        // service overlay
+        function openService(title, text) {
+            document.getElementById('serviceTitle').textContent = title;
+            document.getElementById('serviceText').textContent = text;
+            document.getElementById('servicePage').style.display = 'flex';
+            showBubble('service');
+            playHover();
+        }
+        function closeService() {
+            document.getElementById('servicePage').style.display = 'none';
+        }
+
+        // background music control
+        const audHeaven = document.getElementById('music-heaven');
+        const audEarth = document.getElementById('music-earth');
+        const audHell = document.getElementById('music-hell');
+        let currentAudio = null;
+
+        function stopMusic() {
+            [audHeaven, audEarth, audHell].forEach(a => {
+                a.pause(); a.currentTime = 0;
+            });
+            currentAudio = null;
+        }
+        function playMusicFor(realm) {
+            stopMusic();
+            if (realm === 'heaven') currentAudio = audHeaven;
+            if (realm === 'earth') currentAudio = audEarth;
+            if (realm === 'hell') currentAudio = audHell;
+            if (currentAudio) {
+                currentAudio.volume = realm === 'hell' ? 0.7 : 0.4;
+                currentAudio.play().catch(() => {/* needs one click */ });
+            }
+        }
+
+        // hell flash + thunder visual
+        let flashTimer = null;
+        function hellFlashOnce() {
+            flash.style.opacity = '0.9';
+            setTimeout(() => flash.style.opacity = '0', 120);
+        }
+        function hellFlashLoop() {
+            stopFlash();
+            flashTimer = setInterval(hellFlashOnce, 2500);
+        }
+        function stopFlash() {
+            if (flashTimer) { clearInterval(flashTimer); flashTimer = null; }
+            flash.style.opacity = '0';
+        }
+
+        // first click to allow audio (browser autoplay policy)
+        window.addEventListener('click', function first() {
+            showBubble('welcome');
+            window.removeEventListener('click', first);
+        });
+        function createSparkles(){
+    const wrap=document.getElementById('sparkles');
+    for(let i=0;i<40;i++){
+        const s=document.createElement('div');
+        s.className='sparkle';
+        s.style.left=Math.random()*100+'%';
+        s.style.animationDelay=(Math.random()*4)+'s';
+        wrap.appendChild(s);
+    }
+}
+createSparkles();
+
+document.getElementById('guideGod').addEventListener('click',()=>{
+    showBubble('service');     // koi bhi category, bas funny message aayega
+});
+
+        // Initialize the page
+        showBubble('welcome');
+        
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <span class="copy">&copy; 2025 Sahil's Website. All rights reserved.</span>
+            <span class="contact">Contact us at:
+                <a href="mailto:sahilshaikhcse@gmail.com">sahilshaikhcse@gmail.com</a>
+            </span>
+        </div>
+    </footer>
+
+<div id="sparkles"></div>
+
+
+</body>
+
+</html>

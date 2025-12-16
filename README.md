@@ -119,10 +119,17 @@ $conn->set_charset("utf8mb4");
 
 1. User first opens the **welcome page**:  
    `http://localhost/Hell/welcome.html`
-2. From there:
-   - **Sign Up** → `signup.php` form → posts to `Backend/signup.php` which saves the user in the DB.  
+
+  ![welcome-page](Img/welcome.png)
+   
+3. From there:
+   - **Sign Up** → `signup.php` form → posts to `Backend/signup.php` which saves the user in the DB.
+     
+![signup-page](Img/signup.png)  
    - **Login** → `login.php` form → posts to `Backend/login.php` which verifies email + password.
-3. On successful login, the user is redirected to **`index.html` (ghost portal)**.
+     
+![signin-page](Img/signin.png)
+4. On successful login, the user is redirected to **`index.html` (ghost portal)**.
 
 Passwords are stored securely using `password_hash()` and checked with `password_verify()`.
 
@@ -132,11 +139,26 @@ Passwords are stored securely using `password_hash()` and checked with `password
 
 1. Go to: `http://localhost/Hell/welcome.html`  
 2. Enter your life goal → Sign Up or Login  
+
+![buffer-page](Img/buffer.png)
+
 3. After login:
-   - Heaven = chill + sparkles  
-   - Earth = normal life reset  
-   - Hell = full horror party mode 🔥  
+   - Home = Three options you have
+     
+![welcome-page](Img/home.png)
+   - Heaven = chill + sparkles
+     
+![welcome-page](Img/heaven.png) 
+   - Earth = normal life reset
+     
+![welcome-page](Img/erth.png)
+   - Hell = full horror party mode 🔥
+     
+![welcome-page](Img/hell.png)
+
 4. Hover over services, click on doors, and enjoy the god’s dialogues.
+
+![welcome-page](Img/msg.png)
 
 ---
 
